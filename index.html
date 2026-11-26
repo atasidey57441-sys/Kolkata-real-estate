@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ganga Crest Realty – Homes, Land & Commercial Spaces in Kolkata</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap">
+<link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/enhancements.css">
+
+</head>
+<body>
+<header><i class="prog" id="prog"></i>
+ <div class="wrap nav">
+  <a class="logo" href="#top">Ganga Crest <b>Realty</b></a>
+  <nav id="nav" aria-label="Main">
+   <ul>
+    <li><a href="#trending">Trending</a></li><li><a href="#listings">Properties</a></li><li><a href="#about">About</a></li><li><a href="#projects">Projects</a></li>
+    <li><a href="#services">Services</a></li><li><a href="#why">Why us</a></li><li><a href="#reviews">Reviews</a></li><li><a href="#contact">Contact</a></li><li><a href="#saved" id="savedLink">Saved <b>0</b></a></li>
+   </ul>
+  </nav>
+  <a class="btn call" href="#contact">Book a site visit</a>
+  <button class="menu" id="menu" aria-expanded="false" aria-controls="nav">Menu</button>
+ </div>
+</header>
+
+<main id="top">
+<div class="hero">
+ <div class="wrap">
+  <h1>Find a place in Kolkata that fits your life.</h1>
+  <p>Apartments, villas, plots and offices across New Town, Salt Lake, Alipore, Behala and beyond, each with verified papers and clear pricing.</p>
+  <div class="cta"><a class="btn" href="#listings">Browse properties</a><a class="btn ghost" href="#contact">Talk to an advisor</a></div>
+  <div class="stats">
+   <div><b>18+ years</b><span>building in Kolkata</span></div>
+   <div><b>3,200</b><span>families settled</span></div>
+   <div><b>42</b><span>completed projects</span></div>
+  </div>
+  <aside class="hero-card" aria-label="Featured property"><div class="ph" style="aspect-ratio:4/3;background:linear-gradient(135deg,#8a5a2b,#3a2410)"><span class="tag">Featured villa</span><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"><path d="M10 52L50 22l40 30M20 46v44h60V46M42 90V68h16v22"/></svg></div><div class="t"><div class="price">₹4.8 Crore</div><h3>Alipore Courtyard Villa</h3><div class="loc" style="color:inherit;opacity:.7">Alipore, Kolkata</div></div></aside>
+  <svg class="skyline" viewBox="0 0 1200 120" preserveAspectRatio="none" aria-hidden="true" fill="currentColor"><path d="M0 120V80h60V50h40v30h50V30h30v50h60V60h40v60h40V40h50v80h70V70h40V20h30v50h50v50h60V60h50v60h40V45h60v75h50V75h60V35h40v85h70V65h60v55h50V50h50v70h60V80h50v40z"/></svg>
+ </div>
+</div>
+
+<div class="wrap">
+ <form class="search" id="filters" aria-label="Property search">
+  <div class="qrow"><label for="fQ">Search by area, project or type</label><input id="fQ" type="search" list="sug" placeholder="Try Salt Lake, villa or Aurora" autocomplete="off"><datalist id="sug"></datalist></div><div class="fgrid">
+   <div><label for="fType">Property type</label><select id="fType"><option value="">All types</option><option>Apartment</option><option>Flat</option><option>Residential land</option><option>Villa</option><option>Commercial</option></select></div>
+   <div><label for="fLoc">Location</label><select id="fLoc"><option value="">All of Kolkata</option></select></div>
+   <div><label for="fBed">Bedrooms</label><select id="fBed"><option value="0">Any</option><option value="1">1+</option><option value="2">2+</option><option value="3">3+</option><option value="4">4+</option></select></div>
+   <div><label for="fAv">Availability</label><select id="fAv"><option value="">Any</option><option>Ready to move</option><option>Under construction</option><option>Launching soon</option></select></div><div><label for="fMin">Min budget</label><select id="fMin"><option value="0">No minimum</option><option value="2500000">₹25 Lakh</option><option value="5000000">₹50 Lakh</option><option value="10000000">₹1 Crore</option></select></div>
+   <div><label for="fMax">Max budget</label><select id="fMax"><option value="0">No maximum</option><option value="5000000">₹50 Lakh</option><option value="10000000">₹1 Crore</option><option value="30000000">₹3 Crore</option><option value="50000000">₹5 Crore</option></select></div>
+   <button class="btn" type="submit">Search</button>
+  </div>
+ </form>
+</div>
+
+<section id="trending"><div class="wrap"><h2>Trending this week</h2><p class="lead">The homes our advisors are showing most often right now.</p><div class="strip" id="strip"></div></div></section>
+<section id="listings">
+ <div class="wrap">
+  <div class="bar">
+   <div><h2>Featured listings</h2><p class="lead" id="count"></p></div>
+   <div><label for="sort">Sort by</label><select id="sort"><option value="feat">Featured</option><option value="lo">Price: low to high</option><option value="hi">Price: high to low</option></select></div>
+  </div>
+  <div class="chips" id="chips" role="group" aria-label="Filter by type"></div>
+  <div class="grid" id="grid" aria-live="polite"></div>
+ </div>
+</section>
+
+<section id="about" class="alt">
+ <div class="wrap two">
+  <div>
+   <h2>A Kolkata builder, not just a broker</h2>
+   <p class="lead">Ganga Crest Realty began in 2008 with one apartment block in Behala. Today we develop, sell and manage homes and commercial spaces across the city, and we stay with every buyer from site visit to registration.</p>
+   <p class="lead">Our team of engineers, architects and legal advisors checks title, approvals and RERA status before any property is listed.</p>
+  </div>
+  <div class="about-art" role="img" aria-label="Placeholder illustration of a building"><svg viewBox="0 0 120 100" fill="none" stroke="currentColor" stroke-width="3"><path d="M10 92h100M22 92V40l24-14v66M46 92V14l36 14v64M82 92V50l18 8v34"/><path d="M56 40h16M56 56h16M56 72h16" stroke-width="2"/></svg></div>
+ </div>
+</section>
+
+<section id="projects">
+ <div class="wrap">
+  <h2>Our projects</h2>
+  <p class="lead">Ongoing and completed developments, with possession dates you can plan around.</p>
+  <div class="proj" id="projGrid"></div>
+ </div>
+</section>
+
+<section id="services" class="alt">
+ <div class="wrap">
+  <h2>Services</h2>
+  <div class="cols">
+   <div class="item"><h3>Buy and sell</h3><p>Shortlisting, negotiation and price benchmarking for residential and commercial deals.</p></div>
+   <div class="item"><h3>Legal and registration</h3><p>Title checks, sale agreements, mutation and registration handled by our in-house advisors.</p></div>
+   <div class="item"><h3>Home loans</h3><p>Tie-ups with leading banks for quick sanction and competitive rates.</p></div>
+   <div class="item"><h3>Property management</h3><p>Tenant search, rent collection and upkeep for owners living outside Kolkata.</p></div>
+   <div class="item"><h3>Interiors</h3><p>Turnkey interior design for new flats and offices, with fixed quotes.</p></div>
+   <div class="item"><h3>Land development</h3><p>Joint ventures with landowners for plotted and apartment projects.</p></div>
+  </div>
+ </div>
+</section>
+
+<section id="why">
+ <div class="wrap">
+  <h2>Why choose us</h2>
+  <div class="why">
+   <div><h3>Verified papers</h3><p>Every listing is checked for clear title and approvals before it goes live.</p></div>
+   <div><h3>Prices stated upfront</h3><p>All-inclusive quotes covering registration, parking and maintenance deposits.</p></div>
+   <div><h3>On-time delivery</h3><p>Over 90% of our projects were handed over on or before the promised date.</p></div>
+   <div><h3>After-sales support</h3><p>A dedicated manager helps you for a year after possession.</p></div>
+  </div>
+ </div>
+</section>
+
+<section id="reviews" class="alt">
+ <div class="wrap">
+  <h2>What our customers say</h2>
+  <div class="quotes">
+   <blockquote><p>They showed us eleven flats in New Town and told us honestly which three weren’t worth it. We moved in within two months.</p><cite>Soumya &amp; Arnab Dutta, 3 BHK buyers</cite></blockquote>
+   <blockquote><p>I live in Pune. They handled my Salt Lake flat’s tenant and repairs, and the rent arrives on the first of every month.</p><cite>Rekha Banerjee, property owner</cite></blockquote>
+   <blockquote><p>Our 2,400 sq ft office in Sector V was ready before the date they gave us. No surprise charges either.</p><cite>Imran Sheikh, founder, a design studio</cite></blockquote>
+  </div>
+ </div>
+</section>
+
+<section id="contact">
+ <div class="wrap two">
+  <div>
+   <h2>Contact us</h2>
+   <p class="lead">Tell us what you’re looking for and an advisor will call you within one working day.</p>
+   <p class="lead"><b>Office:</b> 14 Park Street, Kolkata 700016<br><b>Phone:</b> <a data-tel><span data-phone>+91 98300 00000</span></a><br><b>Email:</b> hello@gangacrest.example<br><b>Hours:</b> Mon–Sat, 10am–7pm</p><p style="margin-top:20px"><a class="btn wab" data-wa="Hello Ganga Crest Realty, I’d like to speak to an advisor.">Chat on WhatsApp</a></p>
+  </div>
+  <form class="contact" id="cform">
+   <div class="row"><div><label for="cn">Name</label><input id="cn" required autocomplete="name"></div><div><label for="cp">Phone</label><input id="cp" type="tel" required autocomplete="tel"></div></div>
+   <div><label for="ce">Email</label><input id="ce" type="email" autocomplete="email"></div>
+   <div><label for="cm">What are you looking for?</label><textarea id="cm" rows="4" placeholder="e.g. 3 BHK in New Town under ₹1.2 Crore"></textarea></div>
+   <div class="btnrow"><button class="btn" type="submit">Request a call back</button><button class="btn wab" type="button" id="cwa">Send on WhatsApp</button></div>
+   <p id="ok" role="status"></p>
+  </form>
+ </div>
+</section>
+</main>
+
+<footer><div class="wrap"><div class="fcols"><div><a class="logo" href="#top">Ganga Crest <b>Realty</b></a><p style="margin-top:12px;max-width:34ch;opacity:.75">Homes, land and commercial spaces across Kolkata, with verified papers and clear pricing.</p></div><div><h4>Explore</h4><ul><li><a href="#listings">Properties</a></li><li><a href="#projects">Projects</a></li><li><a href="#services">Services</a></li><li><a href="#reviews">Reviews</a></li></ul></div><div><h4>Visit us</h4><ul><li>14 Park Street, Kolkata 700016</li><li><a data-tel><span data-phone>+91 98300 00000</span></a></li><li>Mon–Sat, 10am–7pm</li></ul></div></div><div class="fbase"><span>© 2026 Ganga Crest Realty</span><span>Sample content for design preview. Prices and images are placeholders.</span></div></div></footer>
+<dialog id="dlg" aria-label="Property details"></dialog><div id="pv" hidden role="dialog" aria-modal="true" aria-label="Property details"></div><div id="toast" role="status"></div><button id="up" aria-label="Back to top">↑</button>
+
+
+<script src="js/config.js" defer></script>
+<script src="js/data.js" defer></script>
+<script src="js/app.js" defer></script>
+<script src="js/ui.js" defer></script>
+<script src="js/property.js" defer></script>
+<script src="js/enhancements.js" defer></script>
+</body>
+</html>
