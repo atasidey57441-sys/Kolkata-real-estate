@@ -1,0 +1,18 @@
+/* ---- Enhancements ---- */
+.scn{display:block}.ph .scn{position:absolute;inset:0;width:100%;height:100%;z-index:0}.gt.big .scn,.gt .scn{position:absolute;inset:0;width:100%;height:100%;max-width:none}
+.ph>svg:not(.scn),.gt>svg:not(.scn){display:none}
+.card:hover .ph .scn{transform:scale(1.08)}.ph .scn{transition:transform .9s var(--ease)}
+.gal{grid-template-rows:repeat(3,150px)}.gt{overflow:hidden;cursor:pointer;transition:filter .3s}.gt:not(.big):hover{filter:brightness(1.12)}.gt.big{cursor:default;transition:opacity .25s}
+.qrow{margin-bottom:14px}.qrow input{font-size:16px;padding-left:44px;background:var(--bg) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='none' stroke='%23b98524' stroke-width='2.2' stroke-linecap='round'%3E%3Ccircle cx='9' cy='9' r='6'/%3E%3Cpath d='M14 14l5 5'/%3E%3C/svg%3E") 14px 50%/20px no-repeat}
+.fgrid{grid-template-columns:repeat(6,1fr) auto}@media(max-width:1100px){.fgrid{grid-template-columns:repeat(2,1fr)}}@media(max-width:480px){.fgrid{grid-template-columns:1fr}}
+#trending{padding:112px 0 8px}#listings{padding-top:64px}
+.strip{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;padding:28px 4px 24px;margin:0 -4px;scrollbar-width:thin}
+.strip .card{flex:0 0 min(300px,80vw);scroll-snap-align:start;text-decoration:none;color:inherit}.strip .ph{aspect-ratio:4/3}
+.strip .rk{position:absolute;left:12px;bottom:8px;z-index:2;font:700 3.2rem/1 "Cormorant Garamond",serif;color:#fff;text-shadow:0 2px 14px rgba(0,0,0,.5)}
+.avs{color:var(--river);font-weight:700}.tag2.av{color:var(--river);border-color:var(--river)}
+.plan,.pbw{max-width:540px;border:1px solid var(--line);border-radius:12px;padding:16px 20px;background:var(--surface)}
+.plan svg{width:100%;height:auto;color:var(--ink)}.plan small,.pbw small{color:var(--muted);display:block;margin-top:8px}
+.pb{width:100%;border-collapse:collapse}.pb td{padding:10px 0;border-bottom:1px solid var(--line);font-size:15px}.pb td:last-child{text-align:right;font-weight:700}
+.pb tr.t td{font:700 1.5rem "Cormorant Garamond",serif;color:var(--brass);border:0;padding-top:14px}
+blockquote cite::before{content:"★★★★★";display:block;color:var(--brass);letter-spacing:3px;margin-bottom:6px;font-size:14px}
+#savedLink b{background:var(--brass);color:var(--brass-ink);border-radius:99px;padding:1px 8px;margin-left:4px;font-size:12px}
