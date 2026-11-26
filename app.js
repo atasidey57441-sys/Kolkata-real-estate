@@ -1,0 +1,24 @@
+// Helpers, search filters, listing grid, projects, contact form
+const fmt=v=>v>=1e7?"₹"+(v/1e7).toFixed(2).replace(/\.?0+$/,"")+" Crore":"₹"+(v/1e5).toFixed(0)+" Lakh";
+const $=id=>document.getElementById(id);
+const types=Object.keys(G);let chip="";const favs=new Set();const WA=CONFIG.phone;const wa=t=>'https://wa.me/'+WA+'?text='+encodeURIComponent(t);const WAI='<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.2 13.9c-.2.6-1.3 1.1-1.8 1.2-.5.1-1.1.1-1.8-.1-.4-.1-.9-.3-1.5-.6-2.6-1.1-4.3-3.8-4.4-4-.1-.2-1-1.3-1-2.5s.6-1.8.9-2c.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.1.1.3 0 .5l-.3.5-.4.4c-.1.1-.3.3-.1.5.2.3.7 1.2 1.6 1.9 1.1.9 2 1.2 2.3 1.4.3.1.4.1.6-.1l.8-1c.2-.2.4-.2.6-.1l1.9.9c.3.1.5.2.5.4s0 .9-.2 1.4z"/></svg>';
+$("fLoc").insertAdjacentHTML("beforeend",[...new Set(L.map(x=>x.l))].sort().map(x=>`<option>${x}</option>`).join(""));
+function renderChips(){$("chips").innerHTML=[["","All"],...types.map(x=>[x,x]),["__fav","Saved ("+favs.size+")"]].map(([v,t])=>`<button type="button" class="chip" data-v="${v}" aria-pressed="${chip===v}">${t}</button>`).join("")}
+$("chips").onclick=e=>{const b=e.target.closest(".chip");if(!b)return;chip=b.dataset.v;$("fType").value=chip;renderChips();render()};
+function render(){
+ const t=$("fType").value,lo=$("fLoc").value,bd=+$("fBed").value,mn=+$("fMin").value,mx=+$("fMax").value,s=$("sort").value;
+ let r=L.filter(x=>(!t||x.t===t)&&(chip!=="__fav"||favs.has(x.n))&&(!lo||x.l===lo)&&x.b>=bd&&(!mn||x.p>=mn)&&(!mx||x.p<=mx));
+ if(s==="lo")r.sort((a,b)=>a.p-b.p);if(s==="hi")r.sort((a,b)=>b.p-a.p);
+ $("count").textContent=r.length+(r.length===1?" property":" properties")+" match your search.";
+ $("grid").innerHTML=r.length?r.map((x,j)=>`<article class="card" style="--i:${j}" data-id="${x.n}"><div class="ph" style="background:linear-gradient(135deg,${G[x.t][0]},${G[x.t][1]})" role="img" aria-label="Placeholder image for ${x.n}"><span class="tag">${x.t}</span><button type="button" class="fav" aria-label="Save ${x.n}" aria-pressed="${favs.has(x.n)}">♥</button><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round">${I[x.t]}</svg></div><div class="body"><div class="price">${fmt(x.p)}</div><h3>${x.n}</h3><div class="loc">${x.l}, Kolkata</div><div class="meta">${x.b?`<span>${x.b} bedrooms</span>`:""}<span>${x.a.toLocaleString("en-IN")} sq ft</span></div><div class="acts"><button type="button" class="btn">View details</button><a class="wa" target="_blank" rel="noopener" href="${wa('Hi, I’m interested in '+x.n+' ('+fmt(x.p)+') in '+x.l+'.')}" aria-label="Chat on WhatsApp about ${x.n}">${WAI}</a></div></div></article>`).join(""):`<div class="empty"><h3>No properties match these filters</h3><p>Try a wider budget or choose All of Kolkata.</p></div>`;
+}
+$("filters").onsubmit=e=>{e.preventDefault();chip=$("fType").value;renderChips();render();$("listings").scrollIntoView({behavior:"smooth"})};
+["fLoc","fBed","fMin","fMax","sort"].forEach(i=>$(i).onchange=render);
+$("fType").onchange=()=>{chip=$("fType").value;renderChips();render()};
+$("grid").onclick=e=>{const c=e.target.closest(".card");if(!c)return;const n=c.dataset.id,f=e.target.closest(".fav");if(f){const on=!favs.has(n);on?favs.add(n):favs.delete(n);toast(on?"Saved to your shortlist":"Removed from your shortlist");renderChips();if(chip==="__fav")render();else f.setAttribute("aria-pressed",on);return}openDlg(n)};
+const P=[["Aurora Heights","New Town","Under construction","Possession Dec 2027","Apartment"],["Lakeview Residency","Salt Lake","Ready to move","Handed over 2025","Flat"],["Alipore Courtyard","Alipore","Launching soon","Bookings open Jan 2027","Villa"],["Sector V Business Hub","Salt Lake","Under construction","Possession Mar 2028","Commercial"]];
+$("projGrid").innerHTML=P.map(p=>`<article class="card"><div class="ph" style="aspect-ratio:21/9;background:linear-gradient(135deg,${G[p[4]][0]},${G[p[4]][1]})" role="img" aria-label="Placeholder image for ${p[0]}"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round" style="width:22%">${I[p[4]]}</svg></div><div class="body"><span class="status">${p[2]}</span><h3>${p[0]}</h3><div class="loc">${p[1]}, Kolkata</div><div class="meta"><span>${p[3]}</span></div></div></article>`).join("");
+$("menu").onclick=()=>{const o=$("nav").classList.toggle("open");$("menu").setAttribute("aria-expanded",o)};
+$("nav").onclick=e=>{if(e.target.tagName==="A"){$("nav").classList.remove("open");$("menu").setAttribute("aria-expanded","false")}};
+$("cform").onsubmit=e=>{e.preventDefault();const f=e.target,b=f.querySelector("button");b.disabled=true;b.textContent="Sending…";setTimeout(()=>{$("ok").textContent="Thank you, "+$("cn").value+". An advisor will call you within one working day.";f.reset();b.disabled=false;b.textContent="Request a call back"},700)};
+renderChips();render();

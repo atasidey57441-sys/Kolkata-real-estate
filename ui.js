@@ -1,0 +1,14 @@
+// Dialog, header scroll effects, reveal animations, active nav link
+const dlg=$("dlg"),tt=$("toast");let tm;
+function toast(m){tt.textContent=m;tt.classList.add("on");clearTimeout(tm);tm=setTimeout(()=>tt.classList.remove("on"),2200)}
+const AM={Apartment:["24x7 security","Covered parking","Clubhouse and gym","Power backup"],Flat:["Lift and security","Parking","Water supply","Near metro or bus"],"Residential land":["Clear title","Approved layout","Paved roads","Drainage and utilities"],Villa:["Private garden","Car porch","Smart-home ready","Gated community"],Commercial:["Central AC ready","Fire safety","Visitor parking","Fibre internet"]};
+function openDlg(n){const x=L.find(v=>v.n===n);if(!x)return;dlg.innerHTML=`<div class="ph" style="aspect-ratio:21/8;background:linear-gradient(135deg,${G[x.t][0]},${G[x.t][1]})"><span class="tag">${x.t}</span><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round" style="width:18%">${I[x.t]}</svg><button class="x" aria-label="Close" data-close>✕</button></div><div class="dbody"><div class="price">${fmt(x.p)}</div><h3>${x.n}</h3><p class="loc">${x.l}, Kolkata</p><dl class="specs"><div><dt>Type</dt><dd>${x.t}</dd></div><div><dt>Area</dt><dd>${x.a.toLocaleString("en-IN")} sq ft</dd></div>${x.b?`<div><dt>Bedrooms</dt><dd>${x.b}</dd></div>`:""}<div><dt>Rate</dt><dd>₹${Math.round(x.p/x.a).toLocaleString("en-IN")}/sq ft</dd></div></dl><ul class="am">${AM[x.t].map(a=>`<li>${a}</li>`).join("")}</ul><button class="btn" data-enq="${x.n}">Enquire about this property</button></div>`;dlg.showModal()}
+dlg.onclick=e=>{if(e.target===dlg||e.target.closest("[data-close]"))dlg.close();const q=e.target.closest("[data-enq]");if(q){$("cm").value="I’d like to know more about "+q.dataset.enq+".";dlg.close();$("contact").scrollIntoView({behavior:"smooth"})}};
+const hd=document.querySelector("header"),pg=$("prog"),up=$("up");
+addEventListener("scroll",()=>{const s=scrollY,h=document.documentElement.scrollHeight-innerHeight;hd.classList.toggle("sc",s>20);pg.style.transform=`scaleX(${h>0?s/h:0})`;up.classList.toggle("on",s>700)},{passive:true});
+up.onclick=()=>scrollTo({top:0,behavior:"smooth"});
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){const t=e.target;t.classList.add("in");io.unobserve(t);setTimeout(()=>t.classList.remove("rv","in"),1200)}}),{threshold:.12});
+document.querySelectorAll("section h2,section .lead,.item,.why>div,blockquote,.proj .card,.about-art,.contact").forEach((el,i)=>{el.classList.add("rv");el.style.setProperty("--d",(i%4)*80+"ms");io.observe(el)});
+const links=[...document.querySelectorAll("nav a")];
+const so=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)links.forEach(a=>a.getAttribute("href")==="#"+e.target.id?a.setAttribute("aria-current","true"):a.removeAttribute("aria-current"))}),{rootMargin:"-45% 0px -50% 0px"});
+document.querySelectorAll("main section").forEach(s=>so.observe(s));
